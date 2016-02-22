@@ -1,0 +1,6 @@
+{
+  "event": "piet",
+  "url": "https://rtherm.firebaseio.com/config.json",
+  "requestType": "GET",
+  "mydevices": "true"
+}
