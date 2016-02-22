@@ -1,0 +1,6 @@
+{
+  "event": "switch",
+  "url": "https://rtherm.firebaseio.com/config/switch.json",
+  "requestType": "GET",
+  "mydevices": "true"
+}
