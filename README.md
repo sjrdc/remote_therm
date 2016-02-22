@@ -14,4 +14,4 @@ Remote switch to our home thermostat
 ![sheet](doc/rtherm_sheet.png)
 
 
-particle create webhook conf.json
+particle create webhook switch.json
