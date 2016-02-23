@@ -14,15 +14,13 @@ int maxit;
 int sleept;
 int delayt;
 
-void setup() 
-{
+void setup() {
     second = 1000;
     minute = 60*second;
-    
     maxit = 2;
     
-    delayt = 5*second;
-    sleept = 5;
+    delayt = 10*second;
+    sleept = 10;
     
     LED = D7;
     pinMode(LED, OUTPUT);
@@ -30,7 +28,12 @@ void setup()
     thermostatePin = D0;
     pinMode(thermostatePin, OUTPUT);
     
-    Particle.subscribe("hook-response/switch", switchHandler, MY_DEVICES);
+    Particle.subscribe("hook-response/switch", switchResponseHandler, MY_DEVICES);
+    
+    Particle.publish("switch");
+
+    delay(3*second);
+    Particle.process();
 
     flash(1, 1000);
 }
@@ -54,8 +57,7 @@ void loop()
         
         if (switchOn)
         {
-            digitalWrite(thermostatePin, HIGH);
-            
+            // safe some power
             Particle.disconnect();
             WiFi.off();
             
@@ -63,12 +65,13 @@ void loop()
         }
         else
         {
+            // safe some power for real
             System.sleep(SLEEP_MODE_DEEP, sleept);
         }
     }
 }
 
-void switchHandler(const char *name, const char *data)
+void switchResponseHandler(const char *name, const char *data)
 {
     if (strcmp(data, "true") == 0) switchOn = true;
     else switchOn = false;
@@ -81,6 +84,6 @@ void flash(int ntimes, int d)
         digitalWrite(LED, HIGH);
         delay(d);
         digitalWrite(LED, LOW);
-        if (i != ntimes - 1) delay(d);
+        delay(d);
     }
 }
