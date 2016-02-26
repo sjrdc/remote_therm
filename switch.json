@@ -1,6 +1,6 @@
 {
-  "event": "switch",
-  "url": "https://rtherm.firebaseio.com/config/switch.json",
+  "event": "thermostat",
+  "url": "https://rtherm.firebaseio.com/config/thermostat.json",
   "requestType": "GET",
   "mydevices": "true"
 }
