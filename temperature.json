@@ -1,0 +1,6 @@
+{
+  "event": "temperature",
+  "url": "https://rtherm.firebaseio.com/config/temperature.json",
+  "requestType": "POST",
+  "mydevices": "true"
+}
