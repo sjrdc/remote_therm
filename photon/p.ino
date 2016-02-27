@@ -4,7 +4,7 @@ int minute;
 int longpause;
 
 int LED;
-int thermostatePin;
+int thermostatPin;
 
 void flash(int ntimes = 2, int delay = 200);
 
@@ -14,23 +14,28 @@ int maxit;
 int sleept;
 int delayt;
 
-void setup() {
+void setup() 
+{
     second = 1000;
     minute = 60*second;
     maxit = 2;
     
+    /* debu settins
     delayt = 10*second;
     sleept = 10;
+    */
+    delayt = 10*60*second;
+    sleept = 10*60;
     
     LED = D7;
     pinMode(LED, OUTPUT);
     
-    thermostatePin = D0;
-    pinMode(thermostatePin, OUTPUT);
+    thermostatPin = D0;
+    pinMode(thermostatPin, OUTPUT);
     
-    Particle.subscribe("hook-response/switch", switchResponseHandler, MY_DEVICES);
+    Particle.subscribe("hook-response/thermostat", switchResponseHandler, MY_DEVICES);
     
-    Particle.publish("switch");
+    Particle.publish("thermostat");
 
     delay(3*second);
     Particle.process();
@@ -50,13 +55,15 @@ void loop()
     if (idx == maxit)
     {
         idx = 0;
-        Particle.publish("switch");
+        Particle.publish("thermostat");
         
         delay(3*second);
         Particle.process();
         
         if (switchOn)
         {
+            digitalWrite(thermostatPin, HIGH);
+            
             // safe some power
             Particle.disconnect();
             WiFi.off();
@@ -65,6 +72,8 @@ void loop()
         }
         else
         {
+            digitalWrite(thermostatPin, LOW);
+            
             // safe some power for real
             System.sleep(SLEEP_MODE_DEEP, sleept);
         }
@@ -87,3 +96,4 @@ void flash(int ntimes, int d)
         delay(d);
     }
 }
+
