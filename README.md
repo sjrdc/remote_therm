@@ -1,8 +1,11 @@
-# remote_therm
+# rtherm
 
-Remote switch to our home thermostat
+In this project I aim to implement a remote switch to our home
+thermostat in order to get acquainted with ARM programming, android
+app development, internet of things, electronics, and last but not
+least to have a nice and warm living when I get home in winter. 
 
-
+## Materials
 * honeywell chronotherm IV modulation
 * particle photon
 * some small stuff
@@ -12,5 +15,6 @@ Remote switch to our home thermostat
  * some wire
 
 ![sheet](doc/rtherm_sheet.png)
+
 
 particle create webhook switch.json
