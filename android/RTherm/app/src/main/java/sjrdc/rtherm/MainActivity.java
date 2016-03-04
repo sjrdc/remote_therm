@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 RTherm therm = snapshot.getValue(RTherm.class);
                 btn_.setChecked(therm.getThermostat());
-                text_.setText(therm.getTemperature() + "0C");
+                text_.setText(therm.getTemperature() + "\u2103");
                 text_.setBackgroundColor(therm.getActive() ? Color.GREEN : Color.RED);
             }
 
@@ -96,8 +96,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void setThermostat(boolean checked) {
-        System.out.println("toggle " + checked);
-
         config_.child("thermostat").setValue(checked);
     }
 }
