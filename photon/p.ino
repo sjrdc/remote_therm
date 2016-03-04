@@ -18,14 +18,16 @@ void setup()
 {
     second = 1000;
     minute = 60*second;
-    maxit = 2;
+    maxit = 3;
+    idx = 0;
     
-    /* debu settins
-    delayt = 10*second;
-    sleept = 10;
+    // debu settins
+    /*
+    delayt = 20*second;
+    sleept = 20;
     */
-    delayt = 10*60*second;
-    sleept = 10*60;
+    delayt = 5*60*second;
+    sleept = 5*60;
     
     LED = D7;
     pinMode(LED, OUTPUT);
@@ -51,17 +53,19 @@ void loop()
     if (switchOn) flash(2, 300);
     else flash(5, 75);
     
+    Particle.publish("thermostat");
+    
     idx ++;
     if (idx == maxit)
     {
         idx = 0;
-        Particle.publish("thermostat");
         
         delay(3*second);
         Particle.process();
         
         if (switchOn)
         {
+            // turn the thermostate on
             digitalWrite(thermostatPin, HIGH);
             
             // safe some power
@@ -72,6 +76,7 @@ void loop()
         }
         else
         {
+            // turn the thermostat off
             digitalWrite(thermostatPin, LOW);
             
             // safe some power for real
@@ -82,8 +87,16 @@ void loop()
 
 void switchResponseHandler(const char *name, const char *data)
 {
-    if (strcmp(data, "true") == 0) switchOn = true;
-    else switchOn = false;
+    if (strcmp(data, "true") == 0) 
+    {
+        switchOn = true;
+        Particle.publish("active-true");
+    }
+    else
+    {
+        switchOn = false;
+        Particle.publish("active-false");
+    }
 }
 
 void flash(int ntimes, int d)
@@ -96,4 +109,3 @@ void flash(int ntimes, int d)
         delay(d);
     }
 }
-
