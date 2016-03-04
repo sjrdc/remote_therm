@@ -14,7 +14,5 @@ least to have a nice and warm living when I get home in winter.
  * transistor P2N2222A
  * some wire
 
-![sheet](doc/rtherm_sheet.png)
-
 
 particle create webhook switch.json
