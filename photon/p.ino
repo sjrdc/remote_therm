@@ -13,6 +13,7 @@ int idx;
 int maxit;
 int sleept;
 int delayt;
+int delaymultiplier;
 
 void setup() 
 {
@@ -27,11 +28,13 @@ void setup()
     sleept = 20;
     */
     int h = Time.hour();
-    int m = 15;
     if (16 < h && h < 21)
-        m = 5;
-    delayt = m*60*second;
-    sleept = m*60;
+      delaymultiplier = 5;
+    else
+      delaymultiplier = 15;
+
+    delayt = delaymultiplier*60*second;
+    sleept = delaymultiplier*60;
     
     LED = D7;
     pinMode(LED, OUTPUT);
@@ -45,8 +48,6 @@ void setup()
 
     delay(3*second);
     Particle.process();
-
-    flash(1, 1000);
 }
 
 void loop() 
