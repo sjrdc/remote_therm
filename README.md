@@ -5,7 +5,7 @@ thermostat in order to get acquainted with ARM programming, android
 app development, internet of things, electronics, and last but not
 least to have a nice and warm living when I get home in winter. 
 
-## Materials
+### Materials
 * honeywell chronotherm IV modulation
 * particle photon
 * some small stuff
@@ -14,5 +14,7 @@ least to have a nice and warm living when I get home in winter.
  * transistor P2N2222A
  * some wire
 
-
-particle create webhook switch.json
+### Configure the photon
+```
+$ particle create webhook photon/webhooks/thermostat.json
+```
