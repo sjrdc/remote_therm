@@ -26,8 +26,12 @@ void setup()
     delayt = 20*second;
     sleept = 20;
     */
-    delayt = 5*60*second;
-    sleept = 5*60;
+    int h = Time.hour();
+    int m = 15;
+    if (16 < h && h < 21)
+        m = 5;
+    delayt = m*60*second;
+    sleept = m*60;
     
     LED = D7;
     pinMode(LED, OUTPUT);
